@@ -1,4 +1,4 @@
-## tquerytool - a command line tool to install tquery.js and its plugins
+## tquerytool - a command line tool to install three.js, tquery.js and its plugins
 
 ### How to Install
 
