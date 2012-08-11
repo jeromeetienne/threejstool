@@ -3,14 +3,26 @@
 var argv	= process.argv.slice(2);
 if( argv[0] === 'init' ){
 	var dstDir	= process.cwd();
-	init(dstDir, function(){
+	doInit(dstDir, function(){
 		console.log('tQuery project initialized at', dstDir)
-	});	
+	});
+}else if( argv[0] === 'install' ){
+	var pluginName	= argv[1];
+	var tqueryPath	= argv[2]	|| process.env['TQUERYPATH'];
+	if( !tqueryPath ){
+		console.log('tquerypath MUST be specified')
+		process.exit();
+	}
+	doInstall(tqueryPath, pluginName, function(pluginPath){
+		console.log('plugins', pluginName, 'installed in', pluginPath);
+	});
 }else if( argv[0] === 'help' || argv[0] === '-h' || argv[0] === '--h' ||  argv[0] === undefined ){
 	console.log('tquerytool: command line tool for tquery.js - http://jeromeetienne.github.com/tquery/')
 	console.log('')
 	console.log('\ttquerytool help\t: display the inline help.')
 	console.log('\ttquerytool init\t: init a tquery project in the current directory.')
+	console.log('\ttquerytool install\t: ```aPlugin tqueryPath``` install a plugin')
+	console.log('\t\t', "export TQUERYPATH=~/webwork/tquery")
 	console.log()
 }else{
 	console.warn('unknown command:', argv[0])
@@ -20,7 +32,32 @@ if( argv[0] === 'init' ){
 //										//
 //////////////////////////////////////////////////////////////////////////////////
 
-function init(dstDir, onSuccess){
+function doInstall(tqueryDir, pluginName, onSuccess){
+	var srcPath	= require('path').join(tqueryDir, 'plugins', pluginName)
+	var dstPath	= require('path').join('vendor/tquery', pluginName)
+	var cmdline	= "cp -a "+escapeshell(srcPath)+" "+escapeshell(dstPath);
+	console.log('execute', cmdline)
+
+	require('child_process').exec(cmdline, function (error, stdout, stderr) {
+		// handle error
+		if( error !== null ){
+			console.log('exec error:', cmdline, ':', error);
+			return;
+		}
+		// notify caller
+		onSuccess && onSuccess(dstPath);
+	});
+	
+	function escapeshell( cmd ){
+		return '"'+cmd.replace(/(["\s'$`\\])/g,'\\$1')+'"';
+	};
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+//										//
+//////////////////////////////////////////////////////////////////////////////////
+
+function doInit(dstDir, onSuccess){
 	var srcDir	= __dirname + '/initFiles';
 	// make directories
 	['vendor', 'vendor/tquery'].forEach(function(dirname){
