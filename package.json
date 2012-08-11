@@ -1,7 +1,7 @@
 {
   "name"      : "tquerytool",
   "version": "0.0.0",
-  "description": "a command line tool for tquery.js",
+  "description": "a command line tool to install tquery.js and its plugins",
   "main": "bin/tquery.js",
   "bin": {
     "tquery": "bin/tquery.js"
