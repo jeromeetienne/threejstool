@@ -2,9 +2,7 @@
 
 ### How to Install
 
-**NOT YET IMPLEMENTED**
-
-Install the package from npmjs.org
+Install the package from npmjs.org (**not yet published**)
 
 ```
 sudo npm install -g tquerytool
