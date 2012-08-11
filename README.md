@@ -4,13 +4,15 @@
 
 **NOT YET IMPLEMENTED**
 
+Install the package from npm
+
 ```
 npm install tquerytool
 ```
 
 ### How to init a project
 
-copy a tquery boilerplate in the current directory.
+Copy a tquery boilerplate in the current directory.
 
 ```
 tquery init
@@ -18,7 +20,7 @@ tquery init
 
 ### Install a plugin
 
-install a plugin in the project of the current directory
+Install a plugin in the project of the current directory
 
 ```
 tquery install pluginName [tquerypath]
@@ -29,7 +31,13 @@ One or the other MUST be provided.
 
 ### Some Helpers
 
-Run a local http server with ```python -m SimpleHTTPServer```
+* Display inline help
+
+```
+tquery help
+```
+
+* Run a local http server with ```python -m SimpleHTTPServer```
 
 ```
 make server

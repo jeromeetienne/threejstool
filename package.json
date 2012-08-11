@@ -1,10 +1,10 @@
 {
-  "name": "tquerytool",
+  "name"      : "tquerytool",
   "version": "0.0.0",
   "description": "a command line tool for tquery.js",
   "main": "bin/tquery.js",
   "bin": {
-    "tquerytool": "tquery.js"
+    "tquery": "bin/tquery.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

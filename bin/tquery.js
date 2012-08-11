@@ -19,10 +19,10 @@ if( argv[0] === 'init' ){
 }else if( argv[0] === 'help' || argv[0] === '-h' || argv[0] === '--h' ||  argv[0] === undefined ){
 	console.log('tquerytool: command line tool for tquery.js - http://jeromeetienne.github.com/tquery/')
 	console.log('')
-	console.log('\ttquerytool help\t: display the inline help.')
-	console.log('\ttquerytool init\t: init a tquery project in the current directory.')
-	console.log('\ttquerytool install\t: ```aPlugin tqueryPath``` install a plugin')
-	console.log('\t\t', "export TQUERYPATH=~/webwork/tquery")
+	console.log('\ttquery help\t: display the inline help.')
+	console.log('\ttquery init\t: copy a tquery boilerplate in the current directory.')
+	console.log('\ttquery install\t: "aPlugin tqueryPath" install a plugin')
+	console.log('\t\t', "export TQUERYPATH=~/path/to/your/tquerycopy")
 	console.log()
 }else{
 	console.warn('unknown command:', argv[0])
