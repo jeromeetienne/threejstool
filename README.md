@@ -4,10 +4,18 @@
 
 **NOT YET IMPLEMENTED**
 
-Install the package from npm
+Install the package from npmjs.org
 
 ```
-npm install tquerytool
+sudo npm install -g tquerytool
+```
+
+Install the package from git
+
+```
+git clone git@github.com:jeromeetienne/tquerytool.git
+cd tquerytool
+sudo npm install -g
 ```
 
 ### How to init a project
