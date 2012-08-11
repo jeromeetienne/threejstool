@@ -2,11 +2,13 @@
 
 ### How to Install
 
+**NOT YET IMPLEMENTED**
+
 ```
 npm install tquerytool
 ```
 
-### How to Use
+### How to init a project
 
 copy a tquery boilerplate in the current directory.
 
