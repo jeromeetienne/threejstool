@@ -45,7 +45,8 @@ One or the other MUST be provided.
 tquery help
 ```
 
-* Run a local http server with ```python -m SimpleHTTPServer```
+* Run a local http server with ```python -m SimpleHTTPServer```. It will serve the local directory
+as static file. check out [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ```
 make server
