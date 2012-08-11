@@ -6,7 +6,7 @@ if( argv[0] === 'init' ){
 	doInit(dstDir, function(){
 		console.log('tQuery project initialized at', dstDir)
 	});
-}else if( argv[0] === 'install' ){
+}else if( argv[0] === 'install' || argv[0] === 'i'  ){
 	var pluginName	= argv[1];
 	var tqueryPath	= argv[2]	|| process.env['TQUERYPATH'];
 	if( !tqueryPath ){
