@@ -60,7 +60,7 @@ function doLibraryGit(command, repository, onSuccess){
 	var dirname	= __dirname + "/data";
 	var cmdline	= 'cd '+escapeshell(dirname)+' && '+gitline;
 	console.log('cmdline', cmdline)
-//return;
+return;
 	require('child_process').exec(cmdline, function (error, stdout, stderr) {
 		console.log('stdout', stdout)
 		// handle error
@@ -183,7 +183,9 @@ function buildProdPlus(mainjsFname, htmlFname){
 	var output	= '';
 	output		+= "<!doctype html>\n"
 	output		+= "<body><script>\n"
+	output		+= require('fs').readFileSync('../../../build/tquery-bundle.js', 'utf8');
 	output		+= require('fs').readFileSync('../require.js', 'utf8');
+	output		+= require('fs').readFileSync('../allmerged.confrequire.js', 'utf8');
 	output		+= require('fs').readFileSync(mainjsFname, 'utf8');
 	output		+= "</script></body>\n"
 	require('fs').writeFileSync(htmlFname, output, 'utf8');
