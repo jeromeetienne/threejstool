@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "description": "a command line tool to install three.js, tquery.js and its plugins ",
   "main": "three.js",
+  "bin": {
+    "threejstool": "three.js",
+    "threejs": "three.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
