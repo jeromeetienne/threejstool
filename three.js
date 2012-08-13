@@ -16,6 +16,8 @@ if( argv[0] === 'init' ){
 	doInstall(tqueryPath, pluginName, function(pluginPath){
 		console.log('plugins', pluginName, 'installed in', pluginPath);
 	});
+}else if( argv[0] === 'build' ){
+	build();
 }else if( argv[0] === 'help' || argv[0] === '-h' || argv[0] === '--h' ||  argv[0] === undefined ){
 	console.log('tquerytool: command line tool for tquery.js - http://jeromeetienne.github.com/tquery/')
 	console.log('')
@@ -108,7 +110,7 @@ function doInit(dstDir, onSuccess){
 //////////////////////////////////////////////////////////////////////////////////
 
 function build(){
-	var filename	= 'planets.html';
+	var filename	= argv[2]	|| console.assert(false, 'a filename MUST be provided to build');
 
 	console.log('getting main.js from', filename)
 	var mainjsStr	= getMainjsFromHtml(filename)

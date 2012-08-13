@@ -1,27 +1,27 @@
-## tquerytool - a command line tool to install three.js, tquery.js and its plugins
+## threejstool - a command line tool to install three.js, threejs.js and its plugins
 
 ### How to Install
 
 Install the package from npmjs.org (**not yet published**)
 
 ```
-sudo npm install -g tquerytool
+sudo npm install -g threejstool
 ```
 
 Install the package from git
 
 ```
-git clone git@github.com:jeromeetienne/tquerytool.git
-cd tquerytool
+git clone git@github.com:jeromeetienne/threejstool.git
+cd threejstool
 sudo npm install -g
 ```
 
 ### How to init a project
 
-Copy a tquery boilerplate in the current directory.
+Copy a threejs boilerplate in the current directory.
 
 ```
-tquery init
+threejs init
 ```
 
 ### Install a plugin
@@ -29,10 +29,10 @@ tquery init
 Install a plugin in the project of the current directory
 
 ```
-tquery install pluginName [tquerypath]
+threejs install pluginName [THREEJSPATH]
 ```
 
-If tquerypath isnt provided, it tries to use environment variable ```TQUERYPATH```.
+If THREEJSPATH isnt provided, it tries to use environment variable ```THREEJSPATH```.
 One or the other MUST be provided.
 
 ### Some Helpers
@@ -40,7 +40,7 @@ One or the other MUST be provided.
 * Display inline help
 
 ```
-tquery help
+threejs help
 ```
 
 * Run a local http server with ```python -m SimpleHTTPServer```. It will serve the local directory
