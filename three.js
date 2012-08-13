@@ -18,16 +18,59 @@ if( argv[0] === 'init' ){
 	});
 }else if( argv[0] === 'build' ){
 	build();
+}else if( argv[0] === 'library' ){
+	doLibrary(argv[1]);
 }else if( argv[0] === 'help' || argv[0] === '-h' || argv[0] === '--h' ||  argv[0] === undefined ){
-	console.log('tquerytool: command line tool for tquery.js - http://jeromeetienne.github.com/tquery/')
+	console.log('threejstool: command line tool for three.js - http://mrdoob.github.com/three.js/')
 	console.log('')
-	console.log('\ttquery help\t: display the inline help.')
-	console.log('\ttquery init\t: copy a tquery boilerplate in the current directory.')
-	console.log('\ttquery install\t: "aPlugin tqueryPath" install a plugin')
+	console.log('\tthreejs help\t: display the inline help.')
+	console.log('\tthreejs init\t: copy boilerplate in the current directory.')
+	console.log('\tthreejs install\t: "aPlugin tqueryPath" install a plugin')
 	console.log('\t\t', "export TQUERYPATH=~/path/to/your/tquerycopy")
 	console.log()
 }else{
 	console.warn('unknown command:', argv[0])
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+//										//
+//////////////////////////////////////////////////////////////////////////////////
+
+function doLibrary(command, onSuccess){
+	console.log('doing library', command)
+
+	doLibraryGit(command, 'https://github.com/jeromeetienne/tquery.js.git')
+	// doLibraryGit(command, 'https://github.com/mrdoob/three.js.git')
+	// doLibraryGit(command, 'https://github.com/jeromeetienne/fireworks.js.git')
+}
+
+function doLibraryGit(command, repository, onSuccess){
+	console.assert(['install', 'update'].indexOf(command) !== -1 )
+	
+	// build the gitline
+	if( command === 'install' ){
+		var gitline	= "git clone "+repository;
+	}else if( command === 'update' ){
+		var basename	= repository.match(/\/([^/]+)\.git$/)[1];
+		var gitline	= "cd "+basename+' && '
+		gitline		+= "git clone "+repository;		
+	}else	console.assert(false);
+	
+	// build the cmdline
+	var dirname	= __dirname + "/data";
+	var cmdline	= 'cd '+escapeshell(dirname)+' && '+gitline;
+	console.log('cmdline', cmdline)
+//return;
+	require('child_process').exec(cmdline, function (error, stdout, stderr) {
+		console.log('stdout', stdout)
+		// handle error
+		if( error !== null ){
+			console.log('exec error:', cmdline, ':', error);
+			return;
+		}
+		// notify caller
+		onSuccess && onSuccess();
+	});
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -50,17 +93,17 @@ function doInstall(tqueryDir, pluginName, onSuccess){
 		onSuccess && onSuccess(dstPath);
 	});
 	
-	function escapeshell( cmd ){
-		return '"'+cmd.replace(/(["\s'$`\\])/g,'\\$1')+'"';
-	};
 }
+function escapeshell( cmd ){
+	return '"'+cmd.replace(/(["\s'$`\\])/g,'\\$1')+'"';
+};
 
 //////////////////////////////////////////////////////////////////////////////////
 //										//
 //////////////////////////////////////////////////////////////////////////////////
 
 function doInit(dstDir, onSuccess){
-	var srcDir	= __dirname + '/initFiles';
+	var srcDir	= __dirname + '/data/boilerplate';
 	// make directories
 	['vendor', 'vendor/tquery'].forEach(function(dirname){
 		var dirPath	= require('path').join(dstDir, dirname)
