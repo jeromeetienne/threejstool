@@ -1,22 +1,19 @@
 {
-  "name"      : "tquerytool",
+  "name": "threejstool",
   "version": "0.0.0",
-  "description": "a command line tool to install three.js, tquery.js and its plugins",
-  "main": "bin/tquery.js",
-  "bin": {
-    "tquery": "bin/tquery.js"
-  },
+  "description": "a command line tool to install three.js, tquery.js and its plugins ",
+  "main": "three.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jeromeetienne/tquerytool.git"
+    "url": "git://github.com/jeromeetienne/threejstool.git"
   },
   "keywords": [
-    "tquery",
-    "threejs",
-    "webgl"
+    "three.js",
+    "tquery.js",
+    "tool"
   ],
   "author": "jerome.etienne@gmail.com",
   "license": "MIT"
