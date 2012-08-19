@@ -39,30 +39,45 @@ if( argv[0] === 'init' ){
 function doLibrary(command, onSuccess){
 	console.log('doing library', command)
 
-	doLibraryGit(command, 'https://github.com/jeromeetienne/tquery.js.git')
+	var repositories	= {
+		'fireworks.js'	: 'https://github.com/jeromeetienne/fireworks.js.git',
+		
+	}
+
+	Object.keys(repositories).forEach(function(name){
+		var url	= repositories[name];
+		console.log('do', command, 'on', name)
+		doLibraryGit(command, url);	
+	});
 	// doLibraryGit(command, 'https://github.com/mrdoob/three.js.git')
 	// doLibraryGit(command, 'https://github.com/jeromeetienne/fireworks.js.git')
 }
 
 function doLibraryGit(command, repository, onSuccess){
+	var repoRoot	= __dirname + "/data";
+repoRoot	= '/tmp/threejstool'
+	var basename	= repository.match(/\/([^/]+)\.git$/)[1];
+	var repoDirname	= require('path').join(repoRoot, basename)
+
 	console.assert(['install', 'update'].indexOf(command) !== -1 )
 	
 	// build the gitline
 	if( command === 'install' ){
-		var gitline	= "git clone "+repository;
+		// if( fs.existsSync(repoDirname) ){
+		// 	console.error('Destination ')
+		// 	return;
+		// }
+		var cmdline	= "git clone "+escapeshell(repository)+' '+escapeshell(repoDirname);
 	}else if( command === 'update' ){
-		var basename	= repository.match(/\/([^/]+)\.git$/)[1];
-		var gitline	= "cd "+basename+' && '
-		gitline		+= "git clone "+repository;		
+		var cmdline	= "cd "+escapeshell(repoDirname)+' && git pull'
 	}else	console.assert(false);
 	
 	// build the cmdline
-	var dirname	= __dirname + "/data";
-	var cmdline	= 'cd '+escapeshell(dirname)+' && '+gitline;
+	cmdline		+= ' > /dev/tty 2>/dev/tty';
 	console.log('cmdline', cmdline)
-return;
+//return;
 	require('child_process').exec(cmdline, function (error, stdout, stderr) {
-		console.log('stdout', stdout)
+		// console.log('stdout', stdout)
 		// handle error
 		if( error !== null ){
 			console.log('exec error:', cmdline, ':', error);
